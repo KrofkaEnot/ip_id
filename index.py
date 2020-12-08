@@ -31,31 +31,31 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=['ip_help'])
 @auth
-async def send_welcome(message: types.Message):
+async def send_ip_help(message: types.Message):
     await message.answer(ip_help.help_ip_commands())
 
 
 @dp.message_handler(commands=['ip_ya'])
 @auth
-async def send_welcome(message: types.Message):
+async def send_ip_ya(message: types.Message):
     await message.answer(ip_ident.ip_yandex())
 
 
 @dp.message_handler(commands=['ip_bg'])
 @auth
-async def send_welcome(message: types.Message):
+async def send_ip_bg(message: types.Message):
     await message.answer(ip_ident.ip_beget())
 
 
 @dp.message_handler(commands=['ip_ra'])
 @auth
-async def send_welcome(message: types.Message):
+async def send_ip_ra(message: types.Message):
     await message.answer(ip_ident.ip_ramziv())
 
 
 @dp.message_handler(commands=['ip_2ip'])
 @auth
-async def send_welcome(message: types.Message):
+async def send_ip_2ip(message: types.Message):
     await message.answer(ip_ident.ip_2ip())
 
 
