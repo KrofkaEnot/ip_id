@@ -13,17 +13,21 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
+def in_terminal(message):
+    print(
+        f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
+        f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
+
+
 def auth(func):
     """Проверка отправителя сообщения. Разрешён только один отправитель."""
 
     async def wrapper(message):
         if str(message['from']['id']) != ID_USER_TELEGRAM:
-            print(
-                f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
-                f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
-
+            in_terminal(message)
             sleep(3)
-            return await message.reply(f"Your ID: {message['from']['id']}\n\n"
+            return await message.reply(f"Ваши идентификационные данные не значатся в нашей базе данных:\n\n"
+                                       f"Your ID: {message['from']['id']}\n\n"
                                        f"Your First Name: {message['from']['first_name']}\n\n"
                                        f"Your User Name: {message['from']['username']}\n\n"
                                        f"Your Language: {message['from']['language_code']}", reply=False)
@@ -34,10 +38,8 @@ def auth(func):
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
-    print(
-        f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
-        f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
-
+    in_terminal(message)
+    sleep(2)
     await message.answer("Информационная система\n"
                          "управления доступом.\n\n"
                          "Поддержка осущевствляется @winsys\n\n"
