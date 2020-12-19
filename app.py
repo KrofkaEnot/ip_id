@@ -18,8 +18,9 @@ def auth(func):
 
     async def wrapper(message):
         if str(message['from']['id']) != ID_USER_TELEGRAM:
-            print(f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
-                  f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
+            print(
+                f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
+                f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
 
             sleep(3)
             return await message.reply(f"Your ID: {message['from']['id']}\n\n"
@@ -33,6 +34,10 @@ def auth(func):
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
+    print(
+        f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
+        f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
+
     await message.answer("Информационная система\n"
                          "управления доступом.\n\n"
                          "Поддержка осущевствляется @winsys\n\n"
