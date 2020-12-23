@@ -1,7 +1,10 @@
 import logging
-from time import sleep
+from time import sleep, localtime
 
 from aiogram import Bot, Dispatcher, executor, types
+from aiogram.utils.exceptions import NetworkError
+from requests.exceptions import SSLError
+
 from config import TOKEN_BOT, ID_USER
 import ip_ident
 import ip_help
@@ -13,10 +16,15 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
-def in_terminal(message):
+def in_terminal_print(message):
     print(
         f"ID: {message['from']['id']} FirstName: {message['from']['first_name']} UserName: {message['from']['username']} "
         f"languageCode: {message['from']['language_code']} TEXT: {message['text']}")
+
+
+def time_date_print():
+    return (f"{localtime().tm_hour}:{localtime().tm_min}:{localtime().tm_sec}"
+            f" {localtime().tm_mday}-{localtime().tm_mon}-{localtime().tm_year}")
 
 
 def auth(func):
@@ -24,7 +32,7 @@ def auth(func):
 
     async def wrapper(message):
         if str(message['from']['id']) != ID_USER_TELEGRAM:
-            in_terminal(message)
+            in_terminal_print(message)
             sleep(3)
             return await message.reply(f"Ваши идентификационные данные не значатся в нашей базе данных:\n\n"
                                        f"Your ID: {message['from']['id']}\n\n"
@@ -38,7 +46,7 @@ def auth(func):
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
-    in_terminal(message)
+    in_terminal_print(message)
     sleep(2)
     await message.answer("Информационная система\n"
                          "управления доступом.\n\n"
@@ -76,5 +84,10 @@ async def send_ip_2ip(message: types.Message):
     await message.answer(ip_ident.ip_2ip())
 
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+try:
+    if __name__ == '__main__':
+        executor.start_polling(dp, skip_updates=True)
+except SSLError:
+    print(f"SSLError в {time_date_print()}")
+except NetworkError:
+    print(f"NetworkError в {time_date_print()}")
