@@ -46,4 +46,3 @@ def ip_2ip():
         return ('Недоступен!')
     except:
         return ('Ошибка запроса!')
-
