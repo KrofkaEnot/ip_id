@@ -29,11 +29,11 @@ async def speak_go(message):
     await message.answer(text=f"{time_date_print()}", reply_markup=choice)
 
 
-@dp.callback_query_handler(buy_callback.filter(item_name="test"))
-@auth_call
-async def test_def(call: CallbackQuery, callback_data: dict):
-    print(f'{time_date_print()}')
-    logging.info(call)
+# @dp.callback_query_handler(buy_callback.filter(item_name="test"))
+# @auth_call
+# async def test_def(call: CallbackQuery, callback_data: dict):
+#     print(f'{time_date_print()}')
+#     logging.info(call)
 
 
 @dp.callback_query_handler(buy_callback.filter(item_name="ip_ya"))

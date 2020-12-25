@@ -19,8 +19,8 @@ choice.insert(go_rm)
 go_2ip = InlineKeyboardButton(text='2ip', callback_data="buy:ip_2ip:2ip")
 choice.insert(go_2ip)
 
-test = InlineKeyboardButton(text='TestButton', callback_data="buy:test:test_name")
-choice.insert(test)
+# test = InlineKeyboardButton(text='TestButton', callback_data="buy:test:test_name")
+# choice.insert(test)
 
 cancel = InlineKeyboardButton(text='Cancel', callback_data="cancel")
 choice_cancel.insert(cancel)
