@@ -22,7 +22,7 @@ def auth(func):
 
 
 def auth_call(func):
-    """Проверка отправителя сообщения. Разрешён только один отправитель."""
+    """Проверка отправителя inline сообщений. Разрешён только один отправитель."""
 
     async def wrapper(call, callback_data):
         if str(call['from']['id']) != ID_USER:
