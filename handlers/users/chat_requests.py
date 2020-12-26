@@ -41,7 +41,7 @@ async def speak_go(message):
 async def handlers_yandex(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     quantity = callback_data.get("quantity")
-    logging.info(f"call = {callback_data}")
+    logging.info(f"Запрос: {call.from_user}")
     await call.message.bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                              text=f"По результатам {quantity} ответ {ip_ident.ip_yandex()}",
                                              reply_markup=choice)
@@ -52,7 +52,7 @@ async def handlers_yandex(call: CallbackQuery, callback_data: dict):
 async def handlers_beget(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     quantity = callback_data.get("quantity")
-    logging.info(f"call = {callback_data}")
+    logging.info(f"Запрос: {call.from_user}")
     await call.message.bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                              text=f"По результатам {quantity} ответ {ip_ident.ip_beget()}",
                                              reply_markup=choice)
@@ -63,7 +63,7 @@ async def handlers_beget(call: CallbackQuery, callback_data: dict):
 async def handlers_remziv(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     quantity = callback_data.get("quantity")
-    logging.info(f"call = {callback_data}")
+    logging.info(f"Запрос: {call.from_user}")
     await call.message.bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                              text=f"По результатам {quantity} ответ {ip_ident.ip_ramziv()}",
                                              reply_markup=choice)
@@ -74,7 +74,7 @@ async def handlers_remziv(call: CallbackQuery, callback_data: dict):
 async def handlers_2ip(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
     quantity = callback_data.get("quantity")
-    logging.info(f"call = {callback_data}")
+    logging.info(f"Запрос: {call.from_user}")
     await call.message.bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                              text=f"По результатам {quantity} ответ {ip_ident.ip_2ip()}",
                                              reply_markup=choice)
@@ -82,5 +82,6 @@ async def handlers_2ip(call: CallbackQuery, callback_data: dict):
 
 @dp.callback_query_handler(text='cancel')
 async def cancel_buying(call: CallbackQuery):
+    logging.info(f"Запрос: {call.from_user}")
     await call.answer("Доступ ограничен, пардонте!", show_alert=True)
     await call.message.edit_reply_markup()
