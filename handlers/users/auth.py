@@ -1,6 +1,8 @@
 from time import sleep
+import logging
+
 from config import ID_USER
-from handlers.terminal.log_in_terminal import in_terminal_print
+from handlers.terminal.log_in_terminal import in_terminal_logging, in_terminal_logging_inline
 from keyboards.inline.choice_buttons import choice_cancel
 
 
@@ -9,7 +11,7 @@ def auth(func):
 
     async def wrapper(message):
         if str(message['from']['id']) != ID_USER:
-            in_terminal_print(message)
+            logging.info(in_terminal_logging(message))
             sleep(3)
             return await message.reply(f"Идентификационные данные не значатся в базе данных!\n\n"
                                        f"Your ID: {message['from']['id']}\n\n"
@@ -26,6 +28,7 @@ def auth_call(func):
 
     async def wrapper(call, callback_data):
         if str(call['from']['id']) != ID_USER:
+            logging.info(in_terminal_logging_inline(call))
             return await call.message.bot.edit_message_text(chat_id=call.message.chat.id,
                                                             message_id=call.message.message_id,
                                                             text=f"Доступ закрыт", reply_markup=choice_cancel)
