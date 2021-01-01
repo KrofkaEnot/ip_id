@@ -15,8 +15,6 @@ import logging
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    logging.info(in_terminal_logging(message))
-    sleep(2)
     await message.answer("Информационная система"
                          " управления доступом.\n\n"
                          "(c) @winsys\n\n"

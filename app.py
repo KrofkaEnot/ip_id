@@ -1,8 +1,9 @@
+import logging
+
 from aiogram.utils.exceptions import NetworkError
 from requests.exceptions import SSLError
-from handlers.return_answers import time_date_print
 from aiohttp.client_exceptions import ClientConnectorError
-
+from asyncio.exceptions import TimeoutError
 try:
     if __name__ == '__main__':
         from aiogram import executor
@@ -10,8 +11,10 @@ try:
 
         executor.start_polling(dp)
 except SSLError:
-    print(f"SSLError в {time_date_print()}")
+    logging.info(f"SSLError")
 except NetworkError:
-    print(f'NetworkError в {time_date_print()}')
+    logging.info(f"NetworkError")
 except ClientConnectorError:
-    print(f'ClientConnectorError с NetworkError в {time_date_print()}')
+    logging.info(f"ClientConnectorError с NetworkError")
+except TimeoutError:
+    logging.info(f"TimeoutError")
