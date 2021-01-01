@@ -5,7 +5,6 @@ import logging
 from aiogram.utils.exceptions import NetworkError
 from requests.exceptions import SSLError
 from aiohttp.client_exceptions import ClientConnectorError
-from asyncio.exceptions import TimeoutError
 
 try:
     bot = Bot(token=config.TOKEN_BOT, parse_mode="HTML")
