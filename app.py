@@ -3,7 +3,6 @@ import logging
 from aiogram.utils.exceptions import NetworkError
 from requests.exceptions import SSLError
 from aiohttp.client_exceptions import ClientConnectorError
-from asyncio.exceptions import TimeoutError
 try:
     if __name__ == '__main__':
         from aiogram import executor
